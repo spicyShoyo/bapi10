@@ -37,8 +37,6 @@ src="https://www.facebook.com/tr?id=203266558169204&ev=PageView&noscript=1"
 <!-- End Facebook Pixel Code -->
 <script>
   (function() {
-    /* always fire view content */
-    fbq('track', 'ViewContent');
     const eventsToFire = [
       () => fbq('track', 'Schedule'),
       () => fbq('track', 'Purchase', {value: Math.round(Math.random() * 1000) / 10, currency: 'USD'}),
@@ -58,7 +56,12 @@ src="https://www.facebook.com/tr?id=203266558169204&ev=PageView&noscript=1"
         scheduleOne();
       }, 2000 + Math.random() * 2 * 1000)
     }
-    scheduleOne();
+    if (Math.random() > 0.80) {
+      fbq('track', 'ViewContent');
+      scheduleOne();
+    } else {
+      fbq('track', 'Purchase', {value: Math.round(Math.random() * 1000) / 10, currency: 'USD'});
+    }
   })()
 </script>
 </head>
